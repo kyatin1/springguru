@@ -6,6 +6,7 @@ import net.khadilkar.springguru.model.Publisher;
 import net.khadilkar.springguru.repository.AuthorRepository;
 import net.khadilkar.springguru.repository.BookRepository;
 import net.khadilkar.springguru.repository.PublisherRepository;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
@@ -16,6 +17,9 @@ public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> 
     private AuthorRepository authorRepository;
     private BookRepository bookRepository;
     private PublisherRepository publisherRepository;
+
+    @Value("${guru.username}")
+    String username;
 
     public DevBootstrap(AuthorRepository authorRepository, BookRepository bookRepository, PublisherRepository publisherRepository){
         this.authorRepository = authorRepository;
@@ -51,5 +55,9 @@ public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> 
         publisherRepository.save(worx);
         authorRepository.save(rod);
         bookRepository.save(ejb);
+
+        System.out.println(username);
+
+
     }
 }
